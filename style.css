@@ -239,3 +239,31 @@ td button {
   padding: 4px;
   font-size: 16px;
 }
+.qty-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qty-cell button {
+  width: auto;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.bulk-remove {
+  display: flex;
+  gap: 6px;
+}
+
+.bulk-remove input {
+  width: 60px;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.bulk-remove button {
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #e63946;
+}
