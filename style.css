@@ -241,8 +241,37 @@ td button {
 }
 .qty-cell {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.qty-cell button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+.qty {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.bulk-input {
+  width: 60px;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.bulk-btn {
+  width: auto;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #e63946;
 }
 
 .qty-cell button {
