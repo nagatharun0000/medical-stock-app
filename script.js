@@ -215,7 +215,30 @@ function changeQty(index, value) {
   localStorage.setItem("medicines", JSON.stringify(medicines));
   renderTable(); // instant UI update
 }
+function renderTable() {
+  const table = document.getElementById("medicineTable");
+  table.innerHTML = "";
 
+  let medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+  medicines.forEach((medicine, index) => {
+    const remainingDays = getRemainingDays(medicine.exp);
+
+    table.innerHTML += `
+      <tr class="${remainingDays <= 30 ? 'expiring' : ''}">
+        <td>${medicine.name}</td>
+        <td>${medicine.mfg}</td>
+        <td>${medicine.exp}</td>
+        <td>${remainingDays > 0 ? remainingDays + " days" : "Expired"}</td>
+        <td>
+          <button onclick="changeQty(${index}, -1)">−</button>
+          <span>${medicine.qty}</span>
+          <button onclick="changeQty(${index}, 1)">+</button>
+        </td>
+      </tr>
+    `;
+  });
+}
 /* ===== CLEAR FORMS ===== */
 function clearAddForm() {
   document.getElementById("addName").value = "";
