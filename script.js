@@ -155,15 +155,21 @@ function deleteMedicine() {
 /* ===== HELPERS ===== */
 function remainingMonths(exp) {
   const [y, m] = exp.split("-").map(Number);
-  const now = new Date();
-  return (y - now.getFullYear()) * 12 + (m - (now.getMonth() + 1));
-}
+  const remainingDays = getRemainingDays(medicine.exp);
 
 function saveAndRender() {
   localStorage.setItem("medicines", JSON.stringify(medicines));
   renderTable();
 }
+function getRemainingDays(expDate) {
+  const today = new Date();
+  const exp = new Date(expDate + "-01");
 
+  const diffTime = exp - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}
 /* ===== TABLE ===== */
 function renderTable(filteredList = medicines) {
   const table = document.getElementById("medicineTable");
