@@ -296,3 +296,9 @@ td button {
   font-size: 12px;
   background: #e63946;
 }
+@media (max-width: 480px) {
+  .qty-cell {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
