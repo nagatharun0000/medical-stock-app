@@ -155,17 +155,17 @@ function renderTable(filteredList = medicines) {
       <td>${remainingDays > 0 ? remainingDays + " days" : "Expired"}</td>
 
       <td class="qty-cell">
-        <button onclick="changeQty(${index}, -1)">−</button>
-        <span class="qty">${medicine.qty}</span>
-        <button onclick="changeQty(${index}, 1)">+</button>
+  <button onclick="changeQty(${index}, -1)">−</button>
+  <span class="qty">${medicine.qty}</span>
+  <button onclick="changeQty(${index}, 1)">+</button>
 
-        <div class="bulk-remove">
-          <input type="number" min="1" placeholder="Qty"
-            id="bulk-${index}">
-          <button onclick="removeBulk(${index})">Remove</button>
-        </div>
-      </td>
-    `;
+  <input type="number" min="1" placeholder="Qty"
+    class="bulk-input" id="bulk-${index}">
+
+  <button class="bulk-btn" onclick="removeBulk(${index})">
+    Remove
+  </button>
+</td>
 
     table.appendChild(row);
   });
