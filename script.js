@@ -113,34 +113,43 @@ function saveAndRender() {
 }
 
 /* ===== TABLE ===== */
-function renderTable(list = medicines) {
+function renderTable(filteredList = medicines) {
   const table = document.getElementById("medicineTable");
   table.innerHTML = "";
 
-  list.forEach((m, index) => {
-    const days = getRemainingDays(m.exp);
+  filteredList.forEach((medicine, index) => {
+    const remainingDays = getRemainingDays(medicine.exp);
 
-    let cls = "safe";
-    if (days <= 0) cls = "expired";
-    else if (days <= 30) cls = "critical";
-    else if (days <= 90) cls = "warning";
+    let colorClass = "safe";
+    if (remainingDays <= 0) colorClass = "expired";
+    else if (remainingDays <= 30) colorClass = "critical";
+    else if (remainingDays <= 90) colorClass = "warning";
 
-    table.innerHTML += `
-      <tr class="${cls}">
-        <td>${m.name}</td>
-        <td>${m.mfg}</td>
-        <td>${m.exp}</td>
-        <td>${days > 0 ? days + " days" : "Expired"}</td>
-        <td>
-          <button onclick="changeQty(${index}, -1)">−</button>
-          <span>${m.qty}</span>
-          <button onclick="changeQty(${index}, 1)">+</button>
-        </td>
-      </tr>
+    const row = document.createElement("tr");
+    row.className = colorClass;
+
+    row.innerHTML = `
+      <td>${medicine.name}</td>
+      <td>${medicine.mfg}</td>
+      <td>${medicine.exp}</td>
+      <td>${remainingDays > 0 ? remainingDays + " days" : "Expired"}</td>
+
+      <td class="qty-cell">
+        <button onclick="changeQty(${index}, -1)">−</button>
+        <span class="qty">${medicine.qty}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
+
+        <div class="bulk-remove">
+          <input type="number" min="1" placeholder="Qty"
+            id="bulk-${index}">
+          <button onclick="removeBulk(${index})">Remove</button>
+        </div>
+      </td>
     `;
+
+    table.appendChild(row);
   });
 }
-
 /* ===== UI ===== */
 function toggleAddForm() {
   addForm.classList.toggle("hidden");
