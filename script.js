@@ -69,7 +69,24 @@ function changeQty(index, value) {
   if (medicines[index].qty <= 0) {
     medicines.splice(index, 1);
   }
+function removeBulk(index) {
+  const input = document.getElementById(`bulk-${index}`);
+  const value = Number(input.value);
 
+  if (!value || value <= 0) {
+    alert("Enter valid quantity to remove");
+    return;
+  }
+
+  medicines[index].qty -= value;
+
+  if (medicines[index].qty <= 0) {
+    medicines.splice(index, 1);
+  }
+
+  localStorage.setItem("medicines", JSON.stringify(medicines));
+  renderTable();
+}
   saveAndRender();
 }
 
