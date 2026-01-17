@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<input
+  type="text"
+  placeholder="🔍 Search medicine..."
+  oninput="searchMedicine(this.value)"
+>
+
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medical Stock Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-container" id="loginBox">
+  <h2>Clinic Login</h2>
+
+  <input type="text" id="phone" placeholder="Phone Number">
+  <input type="password" id="password" placeholder="Password">
+  
+  <div class="show-pass">
+    <input type="checkbox" onclick="togglePassword()"> Show Password
+  </div>
+
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- APP -->
+<div class="app-container hidden" id="appBox">
+  <h2>💊 Medicine Stock</h2>
+
+  <div class="top-buttons">
+  <button onclick="exportExcel()">📤 Excel</button>
+  <button onclick="exportPDF()">📄 PDF</button>
+</div>
+
+
+  <!-- TOP BUTTONS -->
+  <div class="top-buttons">
+    <button onclick="toggleAddForm()">＋ Add Medicine</button>
+    <button onclick="toggleDeleteForm()">− Remove Medicine</button>
+  </div>
+
+  <!-- ADD FORM -->
+  <div class="card hidden" id="addForm">
+    <h3>Add Medicine</h3>
+    <input id="addName" placeholder="Medicine Name">
+    <label>MFG (Month / Year)</label>
+    <input id="mfgDate" type="month">
+    <label>EXP (Month / Year)</label>
+    <input id="expDate" type="month">
+    <input id="quantity" type="number" placeholder="Quantity">
+    <button type="button" onclick="addMedicine()">Submit</button>
+
+  </div>
+
+  <!-- DELETE FORM -->
+  <div class="card hidden" id="deleteForm">
+    <h3>Remove Medicine</h3>
+    <input id="delName" placeholder="Medicine Name">
+    <label>EXP (optional)</label>
+    <input id="delExpDate" type="month">
+    <button type="button" onclick="deleteMedicine()">Submit</button>
+
+  </div>
+
+  <!-- MEDICINE TABLE -->
+  <table>
+    <thead>
+      <tr>
+        <th>Medicine</th>
+        <th>MFG</th>
+        <th>EXP</th>
+        <th>Remaining (Months)</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody id="medicineTable"></tbody>
+  </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
