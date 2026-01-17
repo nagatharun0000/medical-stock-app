@@ -62,13 +62,19 @@ function addMedicine() {
   addForm.classList.add("hidden");
 }
 
-/* ===== QUANTITY CHANGE ===== */
+
+/* ===== QUANTITY CHANGE ( + / - ) ===== */
 function changeQty(index, value) {
   medicines[index].qty += value;
 
   if (medicines[index].qty <= 0) {
     medicines.splice(index, 1);
   }
+
+  saveAndRender();
+}
+
+/* ===== BULK REMOVE ===== */
 function removeBulk(index) {
   const input = document.getElementById(`bulk-${index}`);
   const value = Number(input.value);
@@ -84,9 +90,6 @@ function removeBulk(index) {
     medicines.splice(index, 1);
   }
 
-  localStorage.setItem("medicines", JSON.stringify(medicines));
-  renderTable();
-}
   saveAndRender();
 }
 
