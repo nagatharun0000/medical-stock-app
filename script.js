@@ -202,7 +202,19 @@ function renderTable(filteredList = medicines) {
       table.appendChild(row);
     });
 }
+function changeQty(index, value) {
+  let medicines = JSON.parse(localStorage.getItem("medicines")) || [];
 
+  medicines[index].qty += value;
+
+  // If quantity becomes 0 or less → remove row
+  if (medicines[index].qty <= 0) {
+    medicines.splice(index, 1);
+  }
+
+  localStorage.setItem("medicines", JSON.stringify(medicines));
+  renderTable(); // instant UI update
+}
 
 /* ===== CLEAR FORMS ===== */
 function clearAddForm() {
