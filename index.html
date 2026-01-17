@@ -78,7 +78,11 @@
         <th>MFG</th>
         <th>EXP</th>
         <th>Remaining (Months)</th>
-        <th>Qty</th>
+        <td>
+  <button onclick="changeQty(${index}, -1)">−</button>
+  <span class="qty">${medicine.qty}</span>
+  <button onclick="changeQty(${index}, 1)">+</button>
+</td>
       </tr>
     </thead>
     <tbody id="medicineTable"></tbody>
